@@ -32,6 +32,7 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;heigh
 nav.top{display:flex;gap:30px;font-size:15px;color:#3d4250}
 nav.top a:hover{color:var(--ink)}
 .hcta{background:var(--ink);color:#fff;border-radius:999px;padding:10px 20px;font-weight:600;font-size:15px}
+.hacts{display:flex;align-items:center;gap:10px}.hlogin{font-weight:600;font-size:15px;padding:10px 18px;border-radius:999px;border:1.5px solid var(--ink)}.hlogin:hover{background:var(--ink);color:#fff}
 .menu{display:none;background:none;border:0;font-size:24px;cursor:pointer}
 /* hero */
 .hero{text-align:center;padding:90px 0 0;overflow:hidden;background:radial-gradient(900px 520px at 50% 85%,#e6eeff,#fff 70%)}
@@ -158,7 +159,7 @@ footer .copy{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.08);padding
  section{padding:80px 0}
  nav.top{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;gap:0;padding:8px 28px 20px;border-bottom:1px solid var(--line)}
  nav.top.open{display:flex}nav.top a{padding:12px 0;font-size:17px}
- .menu{display:block}.hcta{display:none}
+ .menu{display:block}.hcta{display:none}.hlogin{padding:8px 14px;font-size:14px}
  .cards3,.steps,.who,.cgrid,.biz .wrap,.freebox{grid-template-columns:1fr}
  .bento{grid-template-columns:1fr 1fr}.b.big{grid-column:span 2}
  .freebox{padding:32px}

@@ -1,0 +1,29 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Confirmação de e-mail — Neto</title><meta name="robots" content="noindex">
+<link rel="icon" href="../assets/logo.png"><link rel="stylesheet" href="../assets/neto.css">
+<style>.cbox{max-width:560px;margin:40px 16px;margin-left:auto;margin-right:auto;padding:40px 30px;background:#fff;border:1px solid #ece4d6;border-radius:28px;text-align:center;box-shadow:0 20px 40px -26px rgba(0,0,0,.25)}
+.cbox .ic{display:block;font-size:56px;height:80px;line-height:80px;margin:0 auto 6px}.cbox h1{font-size:34px;margin:18px 0 12px}.cbox p{font-size:19px;line-height:1.5;color:#4b5568}
+.cbox .acts{display:flex;flex-direction:column;gap:12px;margin-top:26px}</style></head><body>
+<header><div class="wrap"><a class="logo" href="../" aria-label="Neto, página inicial"><img src="../assets/logo.png" alt="">Neto</a></div></header>
+<main><div class="cbox" id="box">
+<div class="ic">⏳</div><h1>Confirmando…</h1><p>Só um instante.</p>
+</div></main>
+<script>
+(function(){
+  var h=new URLSearchParams((location.hash||'').replace(/^#/,''));
+  var q=new URLSearchParams(location.search);
+  var err=h.get('error_description')||q.get('error_description')||h.get('error')||q.get('error');
+  var tipo=h.get('type')||q.get('type')||'';
+  var box=document.getElementById('box');
+  var app='<p style="margin-top:14px"><b>Usa o app no celular?</b> Volte ao app Neto e toque em <b>Entrar</b>.</p>';
+  var gestor='<div class="acts"><a class="btn btn-p" href="../parceiros/#/entrar">Sou gestor de empresa: entrar no painel</a><a class="btn" href="https://wa.me/5511927647065?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20para%20entrar%20no%20Neto">Preciso de ajuda (WhatsApp)</a></div>';
+  if(err){
+    box.innerHTML='<div class="ic">🔗</div><h1>Este link já foi usado ou venceu</h1><p>Não se preocupe: se você já tinha tocado no link antes, o seu e-mail <b>já está confirmado</b>. Tente entrar normalmente.</p>'+app+gestor;
+  } else if(tipo==='recovery'){
+    box.innerHTML='<div class="ic">🔑</div><h1>Trocar a senha</h1><p>Para trocar a senha, abra o app Neto (ou a Área do gestor) e toque em <b>Esqueci minha senha</b>. Você recebe um código por e-mail.</p>'+gestor;
+  } else {
+    box.innerHTML='<div class="ic">✅</div><h1>Pronto! E-mail confirmado</h1><p>A sua conta no Neto está ativa.</p>'+app+gestor;
+  }
+  try{history.replaceState(null,'',location.pathname);}catch(e){}
+})();
+</script></body></html>

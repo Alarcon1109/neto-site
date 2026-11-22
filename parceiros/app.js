@@ -471,7 +471,8 @@
         var med = r.medidas || [];
         var unidadeAtual = "";
         c.innerHTML =
-          '<p class="nao-imprime"><a href="#/painel/pacientes">← Voltar</a></p><div class="topo-pn"><h1>' + esc(p.nome) + '</h1><div class="nao-imprime"><select id="di"><option value="7">7 dias</option><option value="30">30 dias</option><option value="90">90 dias</option></select> <button class="btn peq linha" id="pr">Imprimir</button></div></div>' +
+          '<p class="nao-imprime"><a href="#/painel/pacientes">← Voltar</a></p><div class="topo-pn"><h1>' + esc(p.nome) + '</h1><div class="nao-imprime"><select id="di"><option value="7">7 dias</option><option value="30">30 dias</option><option value="90">90 dias</option></select> <button class="btn peq linha" id="pr">Imprimir / salvar PDF</button></div></div>' +
+          '<p class="so-impressao"><b>' + esc(org.nome_fantasia || org.razao_social || "") + '</b> · Relatório de medicação dos últimos ' + r.dias + ' dias · Gerado em ' + esc(new Date().toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" })) + '<span id="ui"></span></p>' +
           "<p>" + esc([idade(p.nascimento), p.tipo_sanguineo ? "Tipo sanguíneo " + p.tipo_sanguineo : ""].filter(Boolean).join(" · ")) + "</p>" +
           '<div class="rel"><div><div class="bloco" style="text-align:center"><div class="tt">Doses tomadas · ' + r.dias + ' dias</div><svg width="180" height="180" viewBox="0 0 180 180"><circle cx="90" cy="90" r="70" fill="none" stroke="#efe9dd" stroke-width="18"/>' +
           (pct !== null ? '<circle cx="90" cy="90" r="70" fill="none" stroke="' + (pct >= 80 ? "#1f8a4c" : pct >= 60 ? "#c88a12" : "#c0392b") + '" stroke-width="18" stroke-linecap="round" stroke-dasharray="' + circ.toFixed(1) + '" stroke-dashoffset="' + off.toFixed(1) + '" transform="rotate(-90 90 90)"/>' : "") +
@@ -486,7 +487,7 @@
         $("#di").value = String(dias);
         $("#di").onchange = function () { dias = +this.value; carregar(); };
         $("#pr").onclick = function () { window.print(); };
-        rpc("org_patients").then(function (l) { (l || []).forEach(function (x) { if (x.family_id === id) unidadeAtual = x.unidade || ""; }); if ($("#ud")) $("#ud").value = unidadeAtual; });
+        rpc("org_patients").then(function (l) { (l || []).forEach(function (x) { if (x.family_id === id) unidadeAtual = x.unidade || ""; }); if ($("#ud")) $("#ud").value = unidadeAtual; if ($("#ui")) $("#ui").textContent = unidadeAtual ? " · " + (pref ? "UBS: " : "Unidade: ") + unidadeAtual : ""; });
         $("#us").onclick = function () { rpc("org_set_unit", { _family: id, _unit: $("#ud").value.trim() }).then(function () { aviso("Unidade salva."); }, function (er) { aviso(er.message); }); };
       }, function (er) { falha(c, er); });
     }
